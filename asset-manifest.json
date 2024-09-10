@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ReactKiddoAcademy/static/css/main.e6c13ad2.css",
+    "main.js": "/ReactKiddoAcademy/static/js/main.61018629.js",
+    "static/js/453.bcd7007d.chunk.js": "/ReactKiddoAcademy/static/js/453.bcd7007d.chunk.js",
+    "index.html": "/ReactKiddoAcademy/index.html",
+    "main.e6c13ad2.css.map": "/ReactKiddoAcademy/static/css/main.e6c13ad2.css.map",
+    "main.61018629.js.map": "/ReactKiddoAcademy/static/js/main.61018629.js.map",
+    "453.bcd7007d.chunk.js.map": "/ReactKiddoAcademy/static/js/453.bcd7007d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.61018629.js"
+  ]
+}
