@@ -12,19 +12,3 @@ code {
     monospace;
 }
 
-.topic {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.number {
-  display: inline-block;
-  width: 2ch; /* ch單位用來表示字元寬度，2ch確保佔兩個字元空間 */
-  text-align: right; /* 使數字靠右對齊 */
-}
-
-.userAnswer {
-  width: 50px;
-  height: 50%;
-}
