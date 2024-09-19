@@ -12,3 +12,10 @@ code {
     monospace;
 }
 
+.content{
+  margin: auto;
+  width: 70%;
+  border-style: solid;
+  padding-bottom: 20px;
+  margin-top: 50px;
+}

@@ -2,12 +2,8 @@ import { useState} from "react";
 import '../styles/AdditionPractice.css';
 
 const AdditionPractice = () => {
-    const [questions, setQuestions] = useState([
-        { num1: 0, num2: 0, userAnswer: 0, message: ''},
-        { num1: 0, num2: 0, userAnswer: 0, message: ''},
-        { num1: 0, num2: 0, userAnswer: 0, message: ''},
-        { num1: 0, num2: 0, userAnswer: 0, message: ''}
-    ])
+    const questionCount = 20; // 題目數量
+    const [questions, setQuestions] = useState([]);
 
     // 取隨機數min-max
     const generateRandomNumbers = (min, max) => {
@@ -18,10 +14,11 @@ const AdditionPractice = () => {
     const initializeQuestions = () => {
         let min = 1;
         let max = 10;
-        const newQuestions = questions.map(() => ({
+        const newQuestions = Array.from({ length: questionCount }, () => ({
             num1: generateRandomNumbers(min, max),
             num2: generateRandomNumbers(min, max),
-            userAnswer: ''
+            userAnswer: '',
+            message: ''
         }));
         setQuestions(newQuestions);
     }
@@ -54,7 +51,7 @@ const AdditionPractice = () => {
 
     return (
         <div className="question-content">
-            <div>
+            <div className="topic-content">
                 {questions.map((question, index) => (
                     <Topic
                         key={index}
@@ -67,7 +64,7 @@ const AdditionPractice = () => {
                     />
                 ))}
             </div>
-            <button onClick={handleCheckAnswers} className="btn_check">確認所有答案</button>
+            <button onClick={handleCheckAnswers}>確認</button>
         </div>
     );
 }
@@ -76,7 +73,7 @@ const Topic = ({ num1, num2, userAnswer, onAnswerChange, message, index }) => {
     return (
         <div className="topic">
             <p>
-                {index}.&nbsp;&nbsp;<span className="number">{num1}</span> + <span className="number">{num2}</span> =&nbsp;
+                ({index}).&nbsp;&nbsp;<span className="number">{num1}</span> + <span className="number">{num2}</span> =&nbsp;
             </p>
             <input
                 className="userAnswer"

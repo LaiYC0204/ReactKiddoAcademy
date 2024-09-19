@@ -1,10 +1,10 @@
 import AdditionPractice from "./components/AdditionPractice";
-import './styles/App.css'
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div>
-      <h1>兒童學院</h1>
+      <Navbar></Navbar>
       <div className="content">
         <AdditionPractice></AdditionPractice>
       </div>
