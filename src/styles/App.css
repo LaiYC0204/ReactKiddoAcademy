@@ -1,0 +1,13 @@
+.content{
+    margin: auto;
+    width: 70%;
+    border-style: solid;
+    padding-bottom: 20px;
+    margin-top: 50px;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

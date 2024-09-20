@@ -1,8 +1,11 @@
-import { useState} from "react";
-import '../styles/AdditionPractice.css';
+import { useState, useEffect, useCallback } from "react";
+import { useLocation } from 'react-router-dom';
+import '../styles/Practice.css';
 
-const AdditionPractice = () => {
+const Practice = ({ operation, symbol }) => {
     const questionCount = 20; // 題目數量
+    const min = 1; // 最小數字
+    const max = 10; // 最大數字
     const [questions, setQuestions] = useState([]);
 
     // 取隨機數min-max
@@ -10,10 +13,8 @@ const AdditionPractice = () => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // 初始化問題數據
-    const initializeQuestions = () => {
-        let min = 1;
-        let max = 10;
+    // 初始化問題數據，使用 useCallback 來避免每次重新生成該函數
+    const initializeQuestions = useCallback(() => {
         const newQuestions = Array.from({ length: questionCount }, () => ({
             num1: generateRandomNumbers(min, max),
             num2: generateRandomNumbers(min, max),
@@ -21,12 +22,15 @@ const AdditionPractice = () => {
             message: ''
         }));
         setQuestions(newQuestions);
-    }
+    }, [questionCount, min, max]);
 
-    // 在初始化時生成隨機數
-    useState(() => {
+    // Get the current location
+    const location = useLocation();
+
+    // Reinitialize the question whenever the location (URL) changes
+    useEffect(() => {
         initializeQuestions();
-    }, []);
+    }, [location, initializeQuestions]);
 
     // 處理使用者答案輸入
     const handleAnswerChange = (index, value) => {
@@ -39,8 +43,25 @@ const AdditionPractice = () => {
     const handleCheckAnswers = () => {
         const checkQuestions = [...questions]
         checkQuestions.forEach((question) => {
-            const correctAnswer = question.num1 + question.num2;
-            if (parseInt(question.userAnswer) === correctAnswer) {
+            let correctAnswer;
+            switch (operation) {
+                case 'addition':
+                  correctAnswer = question.num1 + question.num2;
+                  break;
+                case 'subtraction':
+                  correctAnswer = question.num1 - question.num2;
+                  break;
+                case 'multiplication':
+                  correctAnswer = question.num1 * question.num2;
+                  break;
+                case 'division':
+                  correctAnswer = Math.round(question.num1 / question.num2 * 100) / 100;
+                  break;
+                default:
+                  correctAnswer = null;
+            }
+
+            if (parseFloat(question.userAnswer) === correctAnswer) {
                 question.message = '正確';
             } else {
                 question.message = '錯誤';
@@ -58,6 +79,7 @@ const AdditionPractice = () => {
                         index={index + 1}
                         num1={question.num1}
                         num2={question.num2}
+                        symbol={symbol}
                         userAnswer={question.userAnswer}
                         onAnswerChange={(value) => handleAnswerChange(index, value)}
                         message={question.message}
@@ -69,21 +91,22 @@ const AdditionPractice = () => {
     );
 }
 
-const Topic = ({ num1, num2, userAnswer, onAnswerChange, message, index }) => {
+const Topic = ({ num1, num2, symbol, userAnswer, onAnswerChange, message, index }) => {
     return (
         <div className="topic">
             <p>
-                ({index}).&nbsp;&nbsp;<span className="number">{num1}</span> + <span className="number">{num2}</span> =&nbsp;
+                ({index}).&nbsp;&nbsp;<span className="number">{num1}</span> {symbol} <span className="number">{num2}</span> =&nbsp;
             </p>
             <input
                 className="userAnswer"
                 type="number"
                 value={userAnswer}
                 onChange={(e) => onAnswerChange(e.target.value)}
+                placeholder="答案"
             />
             <p>{message}</p>
         </div>
     );
 }
 
-export default AdditionPractice;
+export default Practice;
