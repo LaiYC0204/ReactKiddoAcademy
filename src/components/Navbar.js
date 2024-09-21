@@ -24,7 +24,7 @@ const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          兒童學院
+          <Link to="/" style={{textDecoration: 'none', color: 'white'}}>兒童學院</Link>
         </Typography>
 
         <IconButton edge="end" color="inherit" onClick={handleMenuOpen}>

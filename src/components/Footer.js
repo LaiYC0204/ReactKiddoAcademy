@@ -10,7 +10,7 @@ const Footer = () => {
     <AppBar position="static" component="footer" sx={{ top: 'auto', bottom: 0, backgroundColor: '#f8f9fa', padding: '10px' }}>
       <Toolbar style={{ justifyContent: 'center' }}>
         <Typography variant="body2" color="textSecondary" align="center">
-          &copy; 2024 兒童學院. All rights reserved.
+          &copy; 2024 LaiYC. All rights reserved.
         </Typography>
         <div style={{ marginLeft: '20px' }}>
           <Link href="https://github.com/LaiYC0204/ReactKiddoAcademy" target="_blank" rel="noopener" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>
